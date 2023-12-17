@@ -255,20 +255,13 @@
         <script>
             sessionStorage.clear();
             const privkey = bytesToHex( cryptoUtils.Noble.utils.randomPrivateKey() );
-            function showRegister() {
-                $( '.file_form' ).style.display = "none";
-                $( '.dns_form' ).style.display = "block";
-                $( '.dns_checker' ).style.display = "inline";
-                $( '.dns' ).value = "";
-                $( '.instructions' ).innerHTML = `Enter a domain name you want to register or <span class="upload_file">click here</span> to upload a file instead.`;
-                $( '.upload_file' ).onclick = showUploader;
-            }
+           
             function showUploader() {
                 $( '.file_form' ).style.display = "block";
                 $( '.dns_form' ).style.display = "none";
                 $( '.dns_checker' ).style.display = "none";
-                $( '.instructions' ).innerHTML = `Then upload a file you want that address to own or <span class="registration">click here</span> to register a domain name`;
-                $( '.registration' ).onclick = showRegister;
+                $( '.instructions' ).innerHTML = Upload code you want Bcon's GKV to store`;
+             
             }
             showUploader();
             $( '.form' ).addEventListener( "change", async function() {
