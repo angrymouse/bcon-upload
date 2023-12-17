@@ -304,15 +304,14 @@
                 const seckey = new KeyPair(privkey);
                 const pubkey   = seckey.pub.rawX;
                 const mimetype = ec.encode( sessionStorage[ "mimetype" ] );
-                const script   = [ pubkey, 'OP_CHECKSIG', 'OP_0', 'OP_IF', ec.encode('ord'), '01', mimetype, 'OP_0', data, 'OP_ENDIF' ];
+                const script   = [ pubkey, 'OP_CHECKSIG', 'OP_0', 'OP_IF', ec.encode('bcon'), '00', data, 'OP_ENDIF' ];
                 const leaf       = await BTON.Tap.getLeaf(BTON.Script.encode(script));
                 const [ tapkey ] = await BTON.Tap.getPubkey(pubkey, [ leaf ]);
                 const cblock     = await BTON.Tap.getPath(pubkey, leaf);
                 console.log('Tapkey:', tapkey);
                 var fundingAddress = BTON.Tap.encodeAddress( tapkey, 'tb' );
                 console.log('Funding address: ', fundingAddress );
-                //var toAddress = prompt( "give me the address you your inscription to arrive in and consider using this one: tb1padwymyc6x2dfc3cwzvpxxcqsr3c46cjx9zxg0jmcuf44fjuwljxs7x68fm" );
-                //var toAddress = "tb1padwymyc6x2dfc3cwzvpxxcqsr3c46cjx9zxg0jmcuf44fjuwljxs7x68fm";
+   
                 var toAddress = $( '.address' ).value;
                 console.log('Address that will receive the inscription:', toAddress );
                 var decodedToAddress = "5120" + BTON.Tap.decodeAddress( toAddress ).hex;
@@ -359,7 +358,7 @@
                 if ( sessionStorage[ "determined_feerate" ] ) {
                     feerate = Number( sessionStorage[ "determined_feerate" ] );
                 } else {
-                    feerate = await getMinFeeRate();
+                    feerate = 1
                 }
                 var fee = feerate * txsize;
                 console.log( "feerate:", feerate, "txsize:", txsize, "fee:", fee );
