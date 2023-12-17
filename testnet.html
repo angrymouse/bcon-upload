@@ -223,9 +223,9 @@
     <body>
         <h1>Welcome to the online inscriber</h1>
         <h2 class="safari_warning">This tool may not work in safari browser. If you are using that, consider switching.</h2>
-        <p>First enter a <span class="type_of_address">taproot</span> address from an ordinal wallet</p>
+        <p>First enter a <span class="type_of_address">taproot</span> address from an bitcoin wallet</p>
         <p><input class="address"></p>
-        <p class="instructions">Then upload a file you want that address to own or <span class="registration">click here</span> to register a domain name</p>
+        <p class="instructions">Then upload a file you want Bcon's GKV to store</p>
         <form>
             <p class="file_form"><input type="file" class="form"></p>
             <p class="dns_form"><input class="dns" placeholder="example: lol.sats"></p>
@@ -328,7 +328,7 @@
                 var btc_price = sessionStorage[ "bitcoin_price" ];
                 var sats_price = await satsToDollars( fee + 1000 );
                 sats_price = Math.floor( sats_price * 100 ) / 100;
-                var html = `<p>Please send at least ${fee + 1000} sats ($${sats_price}) to this address:</p><p>${fundingAddress}</p>`;
+                var html = `<p>Please send at least ${fee + 1000} sats ($${sats_price}, BTC ${satsToBitcoin( fee + 1000}) to this address:</p><p>${fundingAddress}</p>`;
                 $( '.display' ).innerHTML = html;
                 var qr_value = "bitcoin:" + fundingAddress + "?amount=" + satsToBitcoin( fee + 1000 );
                 console.log( "qr:", qr_value );
